@@ -48,7 +48,7 @@ TarBackup es un script en Bash diseñado para realizar copias de seguridad de di
 ## Ejemplo de Ejecución
 
 ```sh
-$ sudo [tarbackup.sh](http://_vscodecontentref_/#%7B%22uri%22%3A%7B%22%24mid%22%3A1%2C%22fsPath%22%3A%22%2Fhome%2Fabel%2FDocumentos%2FProyectos%2FTarBackup%2Ftarbackup.sh%22%2C%22path%22%3A%22%2Fhome%2Fabel%2FDocumentos%2FProyectos%2FTarBackup%2Ftarbackup.sh%22%2C%22scheme%22%3A%22file%22%7D%7D)
+$ sudo tarbackup.sh
 Seleccione la ruta absoluta donde se guardará la copia [default: /root/backups]: /home/user/backups
 Seleccione el directorio que desea respaldar [default: /]: /home/user/documents
 Indique las rutas que desea excluir separadas por comas [example: /home/tarbackup,/var]: /home/user/documents/temp
