@@ -127,6 +127,15 @@ function get_exclude_paths(){
 		done
 	done <<<"$user_exclude_paths"
 
+	# Eliminar duplicados del array de rutas a excluir
+	for path in "${excluded_paths_array[@]}"; do
+		if [[ $user_backup_directory != "$path" ]]; then
+			tmp_exclude_paths_array+=("$path")
+		fi
+	done
+
+	excluded_paths_array=("${tmp_exclude_paths_array[@]}")
+
 	YELLOW "Las rutas a excluir son: ${excluded_paths_array[*]}"
 }
 
@@ -152,13 +161,7 @@ function create_backup_name(){
 function get_backup_size(){
 	# Obtener el tamaño total del directorio en bytes
 	YELLOW "Calculando el tamaño total del directorio..."
-
-	if [[ "${exclude_options[*]}" =~ "$backup_directory" ]]; then
-		du_command="du -s --block-size=1M $backup_directory 2>/dev/null | cut -f1"
-	else
-		du_command="du -s --block-size=1M ${exclude_options[*]} $backup_directory 2>/dev/null | cut -f1"
-	fi
-
+	du_command="du -s --block-size=1M ${exclude_options[*]} $backup_directory 2>/dev/null | cut -f1"
 	TOTAL=$(eval "$du_command")
 	GREEN "Tamaño total del directorio: $TOTAL M"
 
