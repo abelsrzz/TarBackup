@@ -152,7 +152,13 @@ function create_backup_name(){
 function get_backup_size(){
 	# Obtener el tamaño total del directorio en bytes
 	YELLOW "Calculando el tamaño total del directorio..."
-	du_command="du -s --block-size=1M ${exclude_options[*]} $backup_directory 2>/dev/null | cut -f1"
+
+	if [[ "${exclude_options[*]}" =~ "$backup_directory" ]]; then
+		du_command="du -s --block-size=1M $backup_directory 2>/dev/null | cut -f1"
+	else
+		du_command="du -s --block-size=1M ${exclude_options[*]} $backup_directory 2>/dev/null | cut -f1"
+	fi
+
 	TOTAL=$(eval "$du_command")
 	GREEN "Tamaño total del directorio: $TOTAL M"
 
